@@ -1,6 +1,3 @@
-// Importando o arquivo cursos.json (Sem uso por enquanto)
-// let cursos = require("./cursos.json");
-
 // Criando a variável que armazena as informações dos cursos (1 array[] com vários objetos{})
 let cursos = 
     [{
@@ -71,43 +68,32 @@ function exibirCursos() {
 
 // Chamando a função para exibir os cursos
 exibirCursos();
- 
 
-    var updateButton = document.getElementById('btn btn-primary');
-    var favDialog = document.getElementById('favDialog');
-    var outputBox = document.querySelector('output');
-    var selectEl = document.querySelector('select');
-    var confirmBtn = document.getElementById('confirmBtn');
-    
-    // "Update details" button opens the <dialog> 
-    updateButton.addEventListener('click', function onOpen() {
-      if (typeof favDialog.showModal === "function") {
-        favDialog.showModal();
-      } else {
-        alert("The <dialog> API is not supported by this browser");
-      }
-    });
-    // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
-    favDialog.addEventListener('clomodallyse', function onClose() {
-      outputBox.value = favDialog.returnValue + " button clicked - " + (new Date()).toString();
-    });
+// Criando variáveis para receberem os valores dos campos do formulário
+let inputNome = document.getElementById("nome-curso");
+let inputImagem = document.getElementById("imagem-curso");
+let inputDescricao = document.getElementById("descricao-curso");
 
-    
-    var updateButton = document.getElementById('btn btn-secondary m-1');
-    var favDialog1 = document.getElementById('favDialog1');
-    var outputBox = document.querySelector('output');
-    var selectEl = document.querySelector('select');
-    var confirmBtn = document.getElementById('confirmBtn');
-    
-    // "Update details" button opens the <dialog> modally
-    updateButton.addEventListener('click', function onOpen() {
-      if (typeof favDialog1.showModal === "function") {
-        favDialog1.showModal();
-      } else {
-        alert("The <dialog> API is not supported by this browser");
-      }
-    });
-    // "Confirm" button of form triggers "close" on dialog because of [method="dialog"]
-    favDialog1.addEventListener('close', function onClose() {
-      outputBox.value = favDialog1.returnValue + " button clicked - " + (new Date()).toString();
-    });
+// Criando variável para 
+let botaoAdicionar = document.getElementById("btnAdicionar");
+
+function adicionarCurso() {
+    // Criando variáveis que recebem os valores dos inputs
+    let idDoCurso = cursos.length + 1;
+    let valorDoInputNome = inputNome.value;
+    let valorDoInputImagem = inputImagem.value;
+    let valorDoInputDescricao = inputDescricao.value;
+
+    // Inserindo os valores na variável cursos
+    cursos.push({
+        id: idDoCurso,
+        nome: valorDoInputNome,
+        imagem: valorDoInputImagem,
+        descricao: valorDoInputDescricao
+    })
+
+    // Exibe novamente a lista de cursos
+    exibirCursos();
+}
+// Criando evento de click para o botão Adicionar
+botaoAdicionar.addEventListener("click", adicionarCurso);

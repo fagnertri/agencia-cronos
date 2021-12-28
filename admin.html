@@ -28,26 +28,22 @@
 
 
           <h3>Serviços</h3>
-          <!--<button class="btn btn-primary" onclick ="adicionarCursos();" >Adicionar novo</button> -->
-          <dialog id="favDialog">
-            <form method="dialog">
-              <p><label>Novo Curso:
-                <p>Nome do Curso:      <input type="text" name="NomeCurso" size="40" /></p>
-                <p>Imagem do Curso:    <input type="text" name="ImagemCurso" size="40" /></p>
-                <p>Descrição do Curso: <input type="text" name="DescricaoCurso" size="40" /></p>
-              </label></p>
-              
-              <menu>
-                <button value="cancel">Cancel</button>
-                <button id="confirmBtn" value="default">Confirm</button>
-              </menu>
-            </form>
-          </dialog>
-          
-          <menu>
-            <button class="btn btn-primary" id="btn btn-primary">Adicionar novo</button>
-          </menu>
-          
+
+          <form id="formNovoCurso">
+            <h3>Novo Curso</h3>
+
+            <label for="NomeCurso">Nome do Curso:</label>
+            <input type="text" name="NomeCurso" id="nome-curso" /><br>
+
+            <label for="ImagemCurso">Imagem do Curso (url):</label>
+            <input type="text" name="ImagemCurso" id="imagem-curso"/><br>
+
+            <label for="DescricaoCurso">Descrição do Curso:</label>
+            <input type="text" name="DescricaoCurso" id="descricao-curso"/>
+          </form>
+
+          <button class="btn btn-primary" id="btnAdicionar">Adicionar novo</button>
+
 
           <table class="table my-5">
             <thead>
@@ -59,7 +55,7 @@
               </tr>
             </thead>
             <tbody id="painel-cursos">
-              
+
             </tbody>
           </table>
         </div>

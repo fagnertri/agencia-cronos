@@ -55,3 +55,7 @@ table img {
     width: 220px;
     border: 1px solid #ccc;
 }
+
+#formNovoCurso input {
+    width: 80%;
+}
