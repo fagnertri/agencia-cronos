@@ -28,13 +28,13 @@ function exibirCursos() {
     // Para cada item dentro da variável cursos, é criado uma linha da tabela HTML
     for (let i = 0; i < cursos.length; i++) {
         htmlCursos += `
-            <tr>
+            <tr data-index="${cursos[i].id}">
                 <td>${cursos[i].nome}</td>
                 <td><img src=${cursos[i].imagem} class="img-fluid" /></td>
                 <td>${cursos[i].descricao}</td>
                 <td>
-                    <button data-index="${cursos[i].id}" class="btn btn-secondary m-1">editar</button>
-                    <button data-index="${cursos[i].id}"class="btn btn-danger m-1">excluir</button>
+                    <button data-action="editar" class="btn btn-secondary m-1">editar</button>
+                    <button data-action="excluir" class="btn btn-danger m-1">excluir</button>
                 </td>
             </tr>
         `    
@@ -104,22 +104,46 @@ function confirmarAdicao(e) {
     exibirCursos();
 }
 
+let botoesEditarExcluir = document.querySelector("#painel-cursos");
 
+function editarCurso(id) {
+    console.log("editou o id", id);
+}
+
+function excluirCurso(id) {
+    console.log("excluiu o id", id);
+}
+
+function editarExcluir(e) {
+    if (e.target.type == "submit") {
+        let id = e.target.parentNode.parentNode.dataset.index;
+        
+        if (e.target.dataset.action == "editar") {
+            editarCurso(id);
+
+        } else if (e.target.dataset.action == "excluir") {
+            excluirCurso(id);
+        }
+
+    }   
+}
 // EVENT LISTENERS
 
 // Criando evento de click para o botão Adicionar (e aparecer o modal)
 botaoAdicionar.addEventListener("click", apareceModal);
 
-// Criando evento de click para o botão 
+// Criando evento de click para o botão Cancelar a edição 
 botaoCancelar.addEventListener("click", cancelarAdicao);
 
-// Criando evento de click para o botão 
+// Criando evento de click para o botão Confirmar a edição
 botaoConfirmar.addEventListener("click", confirmarAdicao);
 
+// Criando evento de click para fechar o modal
 window.addEventListener("click", function (e) {
     if (e.target == modal) {
         modal.style.display = "none";
     }
 })
 
-  
+// Criando evento de click para os botões Editar e Excluir
+botoesEditarExcluir.addEventListener("click", editarExcluir)
