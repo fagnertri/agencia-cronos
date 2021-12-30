@@ -1,24 +1,22 @@
 // Criando a variável que armazena as informações dos cursos (1 array[] com vários objetos{})
 let cursos = 
     [{
+        id: 1,
         nome: "Desenvolvimento Web",
         imagem: "imagens/ilustra-web.png",
         descricao: "Consequatur debitis ipsa numquam illum placeat quod deleniti."
     },
     {
+        id: 2,
         nome: "Marketing Digital",
         imagem: "imagens/ilustra-marketing.png",
         descricao:"Consequatur debitis ipsa numquam illum placeat quod deleniti."
     },
     {
+        id: 3,
         nome:"Consultoria UX",
         imagem: "imagens/ilustra-ux.png",
         descricao:"Consequatur debitis ipsa numquam illum placeat quod deleniti."
-    },
-    {
-        nome: "Teste 1",
-        imagem: "imagens/ilustra-marketing.png",
-        descricao:"Teste Teste Teste."
     }];
 
 
@@ -79,8 +77,7 @@ function cancelarAdicao(e) {
 
 
 function confirmarAdicao(e) {
-
-    // Previnindo comportamento padrão (de recarregar a página)
+    // // Previnindo comportamento padrão (de recarregar a página)
     e.preventDefault();
 
     // Criando variáveis que recebem os valores dos inputs
@@ -97,9 +94,12 @@ function confirmarAdicao(e) {
         descricao: valorDoInputDescricao
     })
 
+    console.log(cursos[cursos.length-1]);
+
+
     // Fechando o modal
     modal.style.display = "none";
-
+    
     // Exibe novamente a lista de cursos
     exibirCursos();
 }
@@ -110,10 +110,10 @@ function confirmarAdicao(e) {
 // Criando evento de click para o botão Adicionar (e aparecer o modal)
 botaoAdicionar.addEventListener("click", apareceModal);
 
-// Criando evento de click para o botão Adicionar (e aparecer o modal)
+// Criando evento de click para o botão 
 botaoCancelar.addEventListener("click", cancelarAdicao);
 
-// Criando evento de click para o botão Adicionar (e aparecer o modal)
+// Criando evento de click para o botão 
 botaoConfirmar.addEventListener("click", confirmarAdicao);
 
 window.addEventListener("click", function (e) {
