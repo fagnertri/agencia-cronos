@@ -111,7 +111,13 @@ function editarCurso(id) {
 }
 
 function excluirCurso(id) {
-    console.log("excluiu o id", id);
+    for (let i = 0; i < cursos.length; i++){
+        
+        if (cursos[i].id == id){
+            cursos.splice(i, 1);
+            exibirCursos();
+        }
+    };
 }
 
 function editarExcluir(e) {
