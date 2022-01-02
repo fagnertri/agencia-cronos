@@ -49,15 +49,15 @@ function exibirCursos() {
 // Chamando a função para exibir os cursos
 exibirCursos();
 
-// Selecionando o botão para abrir o modal
+// Selecionando o botão para abrir o modal de Adicionar
 let botaoAdicionar = document.getElementById("btnAdicionar");
 
-// Selecionando o modal
-let modal = document.getElementById("myModal");
+// Selecionando o modal de Adicionar
+let modalAdicionar = document.getElementById("modalAdicionar");
 
 
-function apareceModal() {
-    modal.style.display = "block";
+function apareceModalAdicionar() {
+    modalAdicionar.style.display = "block";
 }
 
 // Criando variáveis para receberem os valores dos campos do formulário
@@ -66,15 +66,14 @@ let inputImagem = document.getElementById("imagem-curso");
 let inputDescricao = document.getElementById("descricao-curso");
 
 // Criando variáveis para os botões Cancelar e Confirmar
-let botaoCancelar = document.getElementById("botao-cancelar");
-let botaoConfirmar = document.getElementById("botao-confirmar");
+let botaoCancelarAdicao = document.getElementById("botao-cancelar");
+let botaoConfirmarAdicao = document.getElementById("botao-confirmar");
 
 
 function cancelarAdicao(e) {
     e.preventDefault();
-    modal.style.display = "none";
+    modalAdicionar.style.display = "none";
 }
-
 
 function confirmarAdicao(e) {
     // // Previnindo comportamento padrão (de recarregar a página)
@@ -94,24 +93,78 @@ function confirmarAdicao(e) {
         descricao: valorDoInputDescricao
     })
 
-    console.log(cursos[cursos.length-1]);
-
-
-    // Fechando o modal
-    modal.style.display = "none";
+    // Fechando o modal de Adicionar
+    modalAdicionar.style.display = "none";
     
     // Exibe novamente a lista de cursos
     exibirCursos();
 }
 
+function cancelarEdicao(e) {
+    e.preventDefault();
+    modalEditar.style.display = "none";
+}
+
+function confirmarEdicao(e) {
+    // Previnindo comportamento padrão (de recarregar a página)
+    e.preventDefault();
+
+    let id = document.getElementById("id-curso-edicao").value;
+
+    for (let i = 0; i < cursos.length; i++) {
+        if (cursos[i].id == id){
+            
+            cursos[i].nome = inputNomeEdicao.value;
+            cursos[i].imagem = inputImagemEdicao.value;
+            cursos[i].descricao = inputDescricaoEdicao.value;
+        }
+    }
+
+    // Fechando o modal de Adicionar
+    modalAdicionar.style.display = "none";
+    
+    // Exibe novamente a lista de cursos
+    exibirCursos();
+}
+
+// Selecionando o modal de Adicionar
+let modalEditar = document.getElementById("modalEditar");
+
+
+function apareceModalEditar(id) {
+    modalEditar.style.display = "block";
+    
+    for (let i = 0; i < cursos.length; i++) {
+        if (cursos[i].id == id){
+            
+            inputId.value = cursos[i].id;
+            inputNomeEdicao.value = cursos[i].nome;
+            inputImagemEdicao.value = cursos[i].imagem;
+            inputDescricaoEdicao.value = cursos[i].descricao;
+        }
+
+    }
+}
+
+// Criando variáveis para receberem os valores dos campos do formulário
+let inputId = document.getElementById("id-curso-edicao");
+let inputNomeEdicao = document.getElementById("nome-curso-edicao");
+let inputImagemEdicao = document.getElementById("imagem-curso-edicao");
+let inputDescricaoEdicao = document.getElementById("descricao-curso-edicao");
+
+// Criando variáveis para os botões Cancelar e Confirmar
+let botaoCancelarEdicao = document.getElementById("botao-cancelar-edicao");
+let botaoConfirmarEdicao = document.getElementById("botao-confirmar-edicao");
+
+// Capturando os botões Editar e Excluir
 let botoesEditarExcluir = document.querySelector("#painel-cursos");
 
 function editarCurso(id) {
-    console.log("editou o id", id);
+    apareceModalEditar(id);
 }
 
 function excluirCurso(id) {
-    for (let i = 0; i < cursos.length; i++){
+    for (let i = 0; i < cursos.length; i++) {
         
         if (cursos[i].id == id){
             cursos.splice(i, 1);
@@ -133,23 +186,36 @@ function editarExcluir(e) {
 
     }   
 }
-// EVENT LISTENERS
+////// EVENT LISTENERS
 
-// Criando evento de click para o botão Adicionar (e aparecer o modal)
-botaoAdicionar.addEventListener("click", apareceModal);
+// Criando evento de click para o botão Adicionar (e aparecer o modal de Adicionar)
+botaoAdicionar.addEventListener("click", apareceModalAdicionar);
 
-// Criando evento de click para o botão Cancelar a edição 
-botaoCancelar.addEventListener("click", cancelarAdicao);
+// Criando evento de click para o botão Cancelar a adição 
+botaoCancelarAdicao.addEventListener("click", cancelarAdicao);
 
-// Criando evento de click para o botão Confirmar a edição
-botaoConfirmar.addEventListener("click", confirmarAdicao);
+// Criando evento de click para o botão Confirmar a adição
+botaoConfirmarAdicao.addEventListener("click", confirmarAdicao);
 
-// Criando evento de click para fechar o modal
+// Criando evento de click para fechar o modal de Adicionar quando houver click fora do modal
 window.addEventListener("click", function (e) {
-    if (e.target == modal) {
-        modal.style.display = "none";
+    if (e.target == modalAdicionar) {
+        modalAdicionar.style.display = "none";
     }
 })
+
+// Criando evento de click para fechar o modal de Editar quando houver click fora do modal
+window.addEventListener("click", function (e) {
+    if (e.target == modalEditar) {
+        modalEditar.style.display = "none";
+    }
+})
+
+// Criando evento de click para o botão Cancelar a adição 
+botaoCancelarEdicao.addEventListener("click", cancelarEdicao);
+
+// Criando evento de click para o botão Confirmar a adição
+botaoConfirmarEdicao.addEventListener("click", confirmarEdicao);
 
 // Criando evento de click para os botões Editar e Excluir
 botoesEditarExcluir.addEventListener("click", editarExcluir)
